@@ -1,22 +1,18 @@
 # aerogrant
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library which pulls together integrant and aero for config nirvana 
+https://www.pixelated-noise.com/blog/2022/04/28/integrant-and-aero/index.html
+
+Also throws in the ability of pulling secrets from AWS screets messenger
 
 ## Usage
 
-FIXME
+You can reference integrant but using #ig/ref this allows you to build the intgrant 
+app objects but running (aero.core/read-config)
 
-## License
+In addition to allowing a mix aero config with building integrant you can also pull secrets
+from aws secrets manager using the reader macro of #asm["secret-location# key]
 
-Copyright © 2023 FIXME
+By default it will pull aws credencations by the default aws java client chain but thes can be overriden 
+like so #asm["secret-location# "key" "aws profile" "aws region]
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.

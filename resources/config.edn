@@ -13,5 +13,5 @@
                                          :cn    :cn}}
 
  :mytest
- {:wibblek-value #asm ["dev/bill/test" "wibblek"]
+ {:wibblek-value #asm ["dev/bill/test" "wibblek" #ref [:app :project] #ref [:app :project-region]]
   :testk-value #asm ["dev/bill/test" "testk"]}}

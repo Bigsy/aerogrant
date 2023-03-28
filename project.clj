@@ -10,6 +10,5 @@
                  [com.cognitect.aws/sts "835.2.1307.0"]
                  [com.cognitect.aws/endpoints "1.1.12.415"]
                  [com.cognitect.aws/secretsmanager "835.2.1307.0"]
-                 [integrant "0.8.0"]
-                 [integrant/repl "0.3.2"]]
+                 [integrant "0.8.0"]]
   :repl-options {:init-ns aerogrant.core})
