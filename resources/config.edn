@@ -1,0 +1,17 @@
+{:app {:project                #profile {:local "sredev"
+                                         :dev   "sredev"
+                                         :prd   "sreprod"
+                                         :cn    "sreprod-cn"}
+       :project-region         #profile {:local "eu-west-1"
+                                         :dev   "eu-west-1"
+                                         :prd   "eu-west-1"
+                                         :cn    "cn-north-1"}
+
+       :deployment-environment #profile {:local :local
+                                         :dev   :dev
+                                         :prd   :prd
+                                         :cn    :cn}}
+
+ :mytest
+ {:wibblek-value #asm ["dev/bill/test" "wibblek"]
+  :testk-value #asm ["dev/bill/test" "testk"]}}
