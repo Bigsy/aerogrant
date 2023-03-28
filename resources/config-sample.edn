@@ -1,7 +1,7 @@
-{:app {:project                #profile {:local "sredev"
-                                         :dev   "sredev"
-                                         :prd   "sreprod"
-                                         :cn    "sreprod-cn"}
+{:app {:project                #profile {:local "dev"
+                                         :dev   "dev"
+                                         :prd   "prod"
+                                         :cn    "prod-cn"}
        :project-region         #profile {:local "eu-west-1"
                                          :dev   "eu-west-1"
                                          :prd   "eu-west-1"
@@ -13,5 +13,5 @@
                                          :cn    :cn}}
 
  :mytest
- {:wibblek-value #asm ["dev/bill/test" "wibblek" #ref [:app :project] #ref [:app :project-region]]
-  :testk-value #asm ["dev/bill/test" "testk"]}}
+ {:wibblek-value #asm ["dev/wibble/test" "wibblek" #ref [:app :project] #ref [:app :project-region]]
+  :testk-value #asm ["dev/wibble/test" "wobblek"]}}
