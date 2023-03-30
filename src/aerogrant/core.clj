@@ -36,7 +36,8 @@
                                               (System/getenv "AWS_REGION")
                                               (System/getProperty "AWS_REGION")
                                               (System/getenv "aws.region")
-                                              (System/getProperty "aws.region"))
+                                              (System/getProperty "aws.region")
+                                              "eu-west-1")
                     :credentials-provider (if profile
                                             (wident/default-credentials-provider profile)
                                             (wident/default-credentials-provider))})
@@ -57,9 +58,7 @@
   [_ _ [secret key profile region]]
 
   (let [secrets (:SecretString (aws/invoke (smc-memo region
-                                                      profile)
+                                                     profile)
                                            {:op      :GetSecretValue
-                                                       :request {:SecretId secret}}))]
+                                            :request {:SecretId secret}}))]
     (get-in (json/parse-string secrets) [key])))
-
-(read-config)
