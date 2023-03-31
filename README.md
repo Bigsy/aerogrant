@@ -3,7 +3,7 @@
 A Clojure library which pulls together integrant and aero for config nirvana 
 https://www.pixelated-noise.com/blog/2022/04/28/integrant-and-aero/index.html
 
-Also throws in the ability of pulling secrets from AWS screets messenger
+Also throws in the ability of pulling secrets from AWS secrets messenger
 
 ## Usage
 
