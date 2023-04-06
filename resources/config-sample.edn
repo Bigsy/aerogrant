@@ -1,17 +1,3 @@
-{:app {:project                #profile {:local "dev"
-                                         :dev   "dev"
-                                         :prd   "prod"
-                                         :cn    "prod-cn"}
-       :project-region         #profile {:local "eu-west-1"
-                                         :dev   "eu-west-1"
-                                         :prd   "eu-west-1"
-                                         :cn    "cn-north-1"}
-
-       :deployment-environment #profile {:local :local
-                                         :dev   :dev
-                                         :prd   :prd
-                                         :cn    :cn}}
-
- :mytest
- {:wibblek-value #asm ["dev/wibble/test" "wibblek" #ref [:app :project] #ref [:app :project-region]]
-  :testk-value #asm ["dev/wibble/test" "wobblek"]}}
+:mytest
+{:wibblek-value #asm ["dev/wibble/test" "wibblek" "eu-west-1"]
+ :testk-value #asm ["dev/wibble/test" "wobblek"]}

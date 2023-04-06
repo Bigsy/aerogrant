@@ -8,9 +8,9 @@
 
 (def ^:private sts-client
   "An AWS STS client using static, empty credentials."
-  (aws/client {:api                  :sts
+  (aws/client {:api :sts
                :credentials-provider (credentials/basic-credentials-provider
-                                       {:access-key-id     ""
+                                       {:access-key-id ""
                                         :secret-access-key ""})}))
 
 (defn- assume-role-with-web-identity
@@ -21,9 +21,9 @@
   [role-arn session-name token]
   (let [session-name (or session-name
                          (str "cognitect-aws-api-" (System/currentTimeMillis)))]
-    (-> (aws/invoke sts-client {:op      :AssumeRoleWithWebIdentity
-                                :request {:RoleArn          role-arn
-                                          :RoleSessionName  session-name
+    (-> (aws/invoke sts-client {:op :AssumeRoleWithWebIdentity
+                                :request {:RoleArn role-arn
+                                          :RoleSessionName session-name
                                           :WebIdentityToken token}})
         :Credentials)))
 
@@ -50,10 +50,10 @@
                                                            session-name
                                                            (slurp token))]
              (credentials/valid-credentials
-               {:aws/access-key-id (:AccessKeyId creds)}
-               :aws/secret-access-key (:SecretAccessKey creds)
-               :aws/session-token (:SessionToken creds)
-               ::credentials/ttl (credentials/calculate-ttl creds)
+               {:aws/access-key-id (:AccessKeyId creds)
+                :aws/secret-access-key (:SecretAccessKey creds)
+                :aws/session-token (:SessionToken creds)
+                ::credentials/ttl (credentials/calculate-ttl creds)}
                "web identity"))))))))
 
 (defn default-credentials-provider
@@ -61,17 +61,12 @@
   [[web-identity-credentials-provider]] in the same position as in the AWS SDK
   for Java's default credential provider chain."
   ([]
-   (default-credentials-provider (or (System/getenv "AWS_PROFILE")
-                                     (System/getProperty "AWS_PROFILE")
-                                     (System/getenv "aws.profile")
-                                     (System/getProperty "aws.profile")
-                                     "default")))
-  ([profileoverride]
+   (default-credentials-provider (shared/http-client)))
+  ([http-client]
    (credentials/chain-credentials-provider
      [(credentials/environment-credentials-provider)
       (credentials/system-property-credentials-provider)
       (web-identity-credentials-provider)
-      (credentials/profile-credentials-provider profileoverride)
-      (credentials/container-credentials-provider (shared/http-client))
-      (credentials/instance-profile-credentials-provider (shared/http-client))])))
-
+      (credentials/profile-credentials-provider)
+      (credentials/container-credentials-provider http-client)
+      (credentials/instance-profile-credentials-provider http-client)])))
