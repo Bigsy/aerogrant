@@ -36,4 +36,11 @@
   (let [secrets (:SecretString (aws/invoke (sm-client region)
                                            {:op      :GetSecretValue
                                             :request {:SecretId secret}}))]
-    (get-in (json/parse-string secrets) [key])))
+    (try
+      ;; Attempt to parse the string as JSON
+      (if key
+        (get-in (json/parse-string secrets) [key])
+        (json/parse-string secrets))
+      ;; If JSON parsing fails, catch the exception and just return the original string
+      (catch Exception e
+        secrets))))
