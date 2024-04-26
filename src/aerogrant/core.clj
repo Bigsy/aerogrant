@@ -30,6 +30,10 @@
   [_ _ value]
   (ig/ref value))
 
+(defmethod aero/reader 'ig/refset
+  [_ _ value]
+  (ig/refset value))
+
 (defmethod aero/reader 'asm
   [_ _ [secret key region]]
 
