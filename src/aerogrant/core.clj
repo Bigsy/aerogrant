@@ -7,10 +7,15 @@
             [aerogrant.web-ident :as wident]
             [integrant.core :as ig]))
 
-(defn read-config [profile]
+(defn read-config
+  ([profile]
    (-> "config.edn"
        io/resource
        (aero/read-config {:profile profile})))
+  ([profile opts]
+   (-> "config.edn"
+       io/resource
+       (aero/read-config {:profile profile} opts))))
 
 (defn sm-client [region]
   (try (aws/client {:api                  :secretsmanager
